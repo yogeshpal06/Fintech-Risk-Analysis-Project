@@ -1,4 +1,4 @@
-CREATE DATABSE P3_Loan_Risk_Data;
+CREATE DATABSE Fintech_Risk_Analysis_Data;
 
 Create TABLE Fintech_Application (
 	sk_id_curr        INT PRIMARY KEY,
@@ -14,7 +14,7 @@ Create TABLE Fintech_Application (
 SELECT * FROM Fintech_Application;
 
 COPY fintech_application
-FROM 'E:\Portfolio Project\Data Analyst Project\P3- loan Risk Data\PROCESSED FILES\application_train_clean.csv'
+FROM 'file path :-application_train_clean.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -135,7 +135,7 @@ CREATE TABLE temp_previous_application (
 );
 
 COPY temp_previous_application
-FROM 'E:\Portfolio Project\Data Analyst Project\P3- loan Risk Data\previous_application (Original file).csv'
+FROM 'file path :- previous_application (Original file).csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -156,7 +156,7 @@ CREATE TABLE temp_installments_payments (
 );
 
 COPY temp_installments_payments
-FROM 'E:\Portfolio Project\Data Analyst Project\P3- loan Risk Data\installments_payments (Original file).csv'
+FROM 'file path :-installments_payments (Original file).csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -253,8 +253,7 @@ FROM fintech_underwriting_master
 GROUP BY loan_history_group
 ORDER BY default_rate DESC;
 
--- Now adding delay group and
--- loan history group finding into a column in master table
+-- Now adding delay group and loan history group finding into a column in master table
 
 ALTER TABLE fintech_underwriting_master
 ADD COLUMN delay_group TEXT,
@@ -276,3 +275,4 @@ SET delay_group =
 					WHEN total_previous_loans <= 2 THEN 'Few Loans'
 					ELSE 'Many Loans'
 				END;
+
